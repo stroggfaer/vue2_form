@@ -220,7 +220,7 @@ export default class DynamicForm extends Mixins(ValidationMixin) {
   }
 
   /**
-   * Выбраный форма ;
+   * Выбраная форма ;
    */
   controlFormFind(formId: any): FormControlType | null {
     return formId ? this.visibleControls.find(control => control.id === formId) || null : null;
