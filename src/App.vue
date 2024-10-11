@@ -21,6 +21,7 @@
     <div v-if="menuNav === 'review'" class="content">
       <Content />
     </div>
+    <div class="footer"></div>
   </div>
 </template>
 
@@ -85,13 +86,24 @@ export default class App extends Vue {
   body,html {
     margin: 0px;
     padding: 0px;
+    height: 100%;
   }
   /* Глобальные стили */
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
   .content {
      padding: 20px;
+     flex: 1;
+  }
+  .footer {
+    margin-top: 40px;
+    padding: 40px 20px;
+    background: #6c757d;
+    flex-shrink: 0;
   }
   h2 {
     margin-bottom: 1em;

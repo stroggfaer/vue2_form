@@ -131,7 +131,7 @@ export default class DynamicForm extends Mixins(ValidationMixin) {
     if (this.validateForm(formId)) {
       const getFormData = this.getFormData(formId);
       this.$emit('on-submit', <FormDataPost>{formId, form: getFormData});
-      this.handleCancel(formId);
+      this.handleClearForm(formId);
     }else {
       this.$emit('on-errors', this.errors);
     }
@@ -143,19 +143,26 @@ export default class DynamicForm extends Mixins(ValidationMixin) {
   handleCancel(formId: string) {
     this.isVisibleConfirm = true;
     this.confirmCallback = () => {
-      this.keyRandomHandle();
-      const formControls = this.getControlsByParentId(formId);
-      formControls.forEach(control => {
-        this.$set(this.formData, control.id, '');
-        this.$delete(this.errors, control.id);
-      });
-      this.formErrors = this.formErrors.filter(error => {
-        return !formControls.some(control => error.includes(control.caption));
-      });
-      // Удаляем данные из localStorage
-      deleteLocalStorageFormData(formControls);
-      console.log(`Форма ${formId} отменена и данные сброшены.`);
+       this.handleClearForm(formId);
     }
+  }
+
+  /**
+   * Обработка очистка формы.
+   */
+  handleClearForm(formId: string) {
+    this.keyRandomHandle();
+    const formControls = this.getControlsByParentId(formId);
+    formControls.forEach(control => {
+      this.$set(this.formData, control.id, '');
+      this.$delete(this.errors, control.id);
+    });
+    this.formErrors = this.formErrors.filter(error => {
+      return !formControls.some(control => error.includes(control.caption));
+    });
+    // Удаляем данные из localStorage
+    deleteLocalStorageFormData(formControls);
+    console.log(`Форма ${formId} отменена и данные сброшены.`);
   }
 
   /**
