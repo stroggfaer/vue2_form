@@ -135,7 +135,7 @@ export const dataSource: FormSchema = {
         {
             id: '5927943750008',
             control: 'BUTTON_CANCEL',
-            caption: 'Отмена',
+            caption: 'Очистить',
             parentID: '5927943491',
             tabIndex: 10,
             position: 12,

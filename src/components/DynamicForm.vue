@@ -203,7 +203,7 @@ export default class DynamicForm extends Mixins(ValidationMixin) {
     if (formData) {
       this.formData = formData;
     } else {
-      // Инициализация formData с дефолтными значениями (Можно потом расширить и доработать код в рамках тест задание хватает часть)
+      // Инициализация formData с дефолтными значениями (Можно потом расширить и доработать код в рамках тест задания хватает часть)
       this.formSchema.controls.forEach(control => {
         if (control.control === 'RADIO') {
           const selectedOption = control.options?.find(option => option.selected);
