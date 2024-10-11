@@ -32,8 +32,8 @@ export interface FormData {
 }
 // Radio / Select
 export interface OptionsType {
-    label: string;
-    value: string | number;
+    label: string | number;
+    value: any;
     selected?: boolean;
     checked?: boolean;
 }

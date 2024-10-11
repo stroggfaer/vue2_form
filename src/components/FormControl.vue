@@ -165,7 +165,7 @@ export default class FormControlComponent extends Vue {
 
   // 'primary', 'secondary', 'danger'
   get buttonVariant(): Variant {
-    return this.control.variant || 'primary';
+    return (this.control.variant || 'primary') as Variant;
   }
 
 }

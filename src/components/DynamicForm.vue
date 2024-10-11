@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import {FormSchema, FormControl as FormControlType, FormData, FormDataPost} from '@/types/form';
 import FormControl from './FormControl.vue';
 import {
@@ -41,7 +41,7 @@ import Confirm from "@/components/ui/Confirm.vue";
     FormControl,
   },
 })
-export default class DynamicForm extends Vue.extend(ValidationMixin) {
+export default class DynamicForm extends Mixins(ValidationMixin) {
   @Prop({ required: true }) readonly formSchema!: FormSchema;
   private confirmCallback: (() => void) | null = null;
 
@@ -91,7 +91,7 @@ export default class DynamicForm extends Vue.extend(ValidationMixin) {
       id: control.id,
       value: this.formData[control.id],
       caption: control.caption,
-      required: control.required,
+      required: control.required ?? false
     }));
 
     const validationResult = this.validateAll(fieldsToValidate);
@@ -215,7 +215,7 @@ export default class DynamicForm extends Vue.extend(ValidationMixin) {
   /**
    * Выбраный форма ;
    */
-  controlFormFind(formId: any): FormControlType {
+  controlFormFind(formId: any): FormControlType | null {
     return formId ? this.visibleControls.find(control => control.id === formId) || null : null;
   }
 
